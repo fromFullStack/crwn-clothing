@@ -1,44 +1,62 @@
-import React from 'react';
+import React from "react";
 
-import './sign-in.styles.scss';
+import FormInput from '../form-input/form-input.component';
 
-class SignIn extends React.Component{
-    constructor(props) {
-        super(props);
+import "./sign-in.styles.scss";
 
-        this.state = {
-            email: '',
-            password: ''
-        }
-    }
+class SignIn extends React.Component {
+  constructor(props) {
+    super(props);
 
-    handleSubmit = event => {
-        event.preventDefault();
+    this.state = {
+      email: "",
+      password: ""
+    };
+  }
 
-        this.setState({ email: '', password: ''})
-    }
-    
-    handleChanged = event => {
-        const { value, name } = event.target;
+  handleSubmit = event => {
+    event.preventDefault();
 
-        this.setState({ [name]: value})
-    }
+    this.setState({ email: "", password: "" });
+  };
 
-    render() {
-        return (
-            <div className='sign-in'>
-                <h2>I already have an account.</h2>
-                <span>Sign in with your email and password</span>
+  handleChanged = event => {
+    const { value, name } = event.target;
 
-                <form onSubmit={this.handleSubmit}>
-                    <input name="email" type="email" value={this.state.email} onChange={this.handleChanged} required />
-                    <label>Email</label>
-                    <input name="password" type="password" value={this.state.password} onChange={this.handleChanged} required />
-                    <label>Password</label>
+    this.setState({ [name]: value });
+  };
 
-                    <input type='submit' value='Submit Form' />
-                </form>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="sign-in">
+        <h2>I already have an account.</h2>
+        <span>Sign in with your email and password</span>
+
+        <form onSubmit={this.handleSubmit}>
+          <FormInput
+            name="email"
+            type="email"
+            handleChange={this.handleChanged}
+            value={this.state.email}
+            label="email"
+            required
+          />
+          <label>Email</label>
+          <FormInput
+            name="password"
+            type="password"
+            value={this.state.password}
+            handleChange={this.handleChanged}
+            label="password"
+            required
+          />
+          <label>Password</label>
+
+          <input type="submit" value="Submit Form" />
+        </form>
+      </div>
+    );
+  }
 }
+
+export default SignIn;
